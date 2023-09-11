@@ -9,12 +9,12 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        "page-pattern":
+          "url('/seamless-tiling-clouds-gffdcf08bf_1920.jpg')",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tw-elements/dist/plugin.cjs")],
+  safelist: ['animate-[tada]', 'animate-[fade-in]'],
 }
 export default config
