@@ -1,9 +1,10 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Post as PostType } from "../types/types";
 
 
-export default function HomeContent(props) {
+export default function HomeContent(props: { posts: PostType[] }) {
   const { posts } = props;
   return (
     <div className="bg-white py-10 sm:py-10" >

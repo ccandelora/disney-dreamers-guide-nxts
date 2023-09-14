@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { CategoryProps } from "../types/types";
+import { Post as PostType } from "../types/types";
 
-export default function CategoryContent(props: CategoryProps) {
+export default function CategoryContent(props: { posts: PostType[] }) {
   const { posts } = props;
 
   return (

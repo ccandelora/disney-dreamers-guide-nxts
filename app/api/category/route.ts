@@ -5,7 +5,7 @@ import { connectToDatabase } from "../../../libs/mongodb";
 
 connectToDatabase();
 
-export async function GET(){
+export async function GET(req: Request){
     try {
         const posts = await Post.aggregate(
             [

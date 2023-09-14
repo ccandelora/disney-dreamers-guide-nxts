@@ -4,6 +4,7 @@ export type Post = {
   description: string;
   body: string;
   slug: string;
+  author: string;
   alt: string;
   category: string;
   categorySlug: string;
@@ -14,13 +15,19 @@ export type Post = {
   updatedAt: Date;
 };
 
-export type Params = {
-  slug: string;
-};
-
+export type SlugProps = {
+    slug: string;
+}
 export type CategoryProps = {
     posts: Post[];
 };
 export type SocialProps = {
   post: Post;
 };
+
+export type HeroProps = {
+    title: string;
+    photo: string;
+    alt: string;
+}
+

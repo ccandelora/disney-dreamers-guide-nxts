@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
-const GTM_ID = "GTM-TDBSR6HL";
 
 interface Props {
   children: ReactNode;
@@ -17,7 +16,11 @@ export const metadata = {
   description: "Get all the info you need to plan you next Disney World trip!",
 };
 
-export const RootLayout = ({ children }: Props) => {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="en">
       <Script
@@ -52,5 +55,3 @@ export const RootLayout = ({ children }: Props) => {
     </html>
   );
 };
-
-export default RootLayout;

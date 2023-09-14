@@ -6,18 +6,18 @@ import FbShare from "../../../components/FbShare";
 import RedditShare from "../../../components/RedditShare";
 import TwitterShare from "../../../components/TwitterShare";
 import Link from "next/link";
-import { Post, Params } from "../../../types/types";
+import { Post as PostType, SlugProps } from "../../../types/types";
 
-export async function generateStaticParams() {
+export async function generateStaticParams(): Promise<SlugProps[]> {
   const domain = process.env.API_DOMAIN;
   const res = await fetch(domain + "/api/post/").then((res) => res.json());
-  const posts: Post[] = await res.json();
-  return posts.map((post) => ({
+  const posts: PostType[] = await res;
+  return posts.map((post: PostType) => ({
     slug: post.slug,
   }));
 } 
 
-const getData = async (slug: string) => {
+async function getData(slug: string): Promise<PostType[]> {
   const domain = process.env.API_DOMAIN;
   const res = await fetch(domain + "/api/post/" + slug, { cache: "no-cache" });
   
@@ -29,9 +29,9 @@ const getData = async (slug: string) => {
   return res.json();
 }
 
-export async function generateMetadata({ params: { slug } }: {params: Params}) {
-  const postData = await getData(slug);
-  const post = postData[0];
+export async function generateMetadata({params} : {params: {slug: string}}) {
+  const postData: PostType[] = await getData(params.slug);
+  const post: PostType = postData[0];
 
   return {
     title: post.title + " | Disney Dreamer's Guide",
@@ -50,8 +50,8 @@ export async function generateMetadata({ params: { slug } }: {params: Params}) {
       description: post.description,
       type: "article",
       article: {
-        publishedTime: post.date,
-        modifiedTime: post.date,
+        publishedTime: post.createdAt,
+        modifiedTime: post.updatedAt,
         section: post.category,
         authors: ["https://disneydreamersguide.com/author/" + post.author],
         tags: [post.category],
@@ -63,11 +63,11 @@ export async function generateMetadata({ params: { slug } }: {params: Params}) {
     additionalMetaTags: [
       {
         property: "article:published_time",
-        content: post.date,
+        content: post.createdAt,
       },
       {
         property: "article:modified_time",
-        content: post.date,
+        content: post.updatedAt,
       },
       {
         property: "article:section",
@@ -81,9 +81,9 @@ export async function generateMetadata({ params: { slug } }: {params: Params}) {
   };
 }
 
-const Post = async ({ params: { slug } }: {params: Params}) => {
-  const postData = await getData(slug);
-  const post = postData[0];
+const Post = async ( {params}: {params: {slug: string}}) => {
+  const postData: PostType[] = await getData(params.slug);
+  const post: PostType = postData[0];
   return (
     <>
       <div className="bg-white px-6 py-8 lg:px-8">

@@ -1,19 +1,16 @@
 import React from "react";
 import CategoryContent from "../../../components/CategoryContent";
-import { Post, Params } from "../../../types/types";
+import PaginationControls from "../../../components/PaginationControls";
+import { Post as PostType } from "../../../types/types";
 
-export async function generateStaticParams()  {
-  const domain = process.env.API_DOMAIN;
-  const res = await fetch(domain + "/api/category/").then((res) => res.json());
-  const posts: Post[] = await res.json();
-  return posts.map((post: Post) => ({
-    slug: post.categorySlug,
-  }));
+type Props = {
+  params: {slug: string},
+  searchParams: { [key: string]: string | undefined },
 }
 
-const getData = async (slug: string) => {
+async function getData(slug: string): Promise<PostType[]> {
   const domain = process.env.API_DOMAIN;
-  const res = await fetch(domain + "/api/category/" + slug, { cache: "no-cache" });
+  const res = await fetch(domain + "/api/category/" + slug, { cache: "no-cache",});
 
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
@@ -23,9 +20,9 @@ const getData = async (slug: string) => {
   return res.json();
 }
 
-export async function generateMetadata({ params: { slug } }: { params: Params }) {
-  const postData = await getData(slug);
-  const post = postData[0];
+export async function generateMetadata({params} : {params: {slug: string}}) {
+  const postData: PostType[] = await getData(params.slug);
+  const post: PostType = postData[0];
 
   return {
     title: "Disney Dreamer's Guide : " + post.category,
@@ -42,10 +39,24 @@ export async function generateMetadata({ params: { slug } }: { params: Params })
   };
 }
 
-const Category = async ({ params: { slug } } : {params: Params}) => {
-  const posts = await getData(slug);
+const Category = async (props: Props): Promise<JSX.Element> => {
+  const slug: string = props.params.slug;
+  const posts: PostType[] = await getData(slug);
+  const searchParams = props.searchParams;
+  const page: string = searchParams.page ?? '1';
+  const per_page = searchParams.per_page ?? '9';
+  const start: number = (Number(page) - 1) * Number(per_page);
+  const end: number = start + Number(per_page);
+  const entries = posts.slice(start, end);
+  const total: number = posts.length;
+  const total_pages: number = Math.ceil(total / Number(per_page));
 
-  return <CategoryContent posts={posts} />;
+  return (
+    <div>
+      <CategoryContent posts={entries} />
+      <PaginationControls start={start + 1} end={end} total={total} total_pages={total_pages}/>
+    </div>
+  );
 }
 
 export default Category;

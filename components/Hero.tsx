@@ -1,6 +1,7 @@
 import Image from 'next/image'
+import { HeroProps } from "../types/types";
 
-export default function Hero(props) {
+export default function Hero(props: HeroProps) {
     const photo = props.photo;
     const alt = props.alt;
     const title = props.title;
