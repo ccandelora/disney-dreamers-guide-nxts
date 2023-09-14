@@ -1,11 +1,11 @@
 import Validate from "next-api-validation";
 import { NextResponse } from "next/server";
-import { Post, IPost } from "../../../models/Post";
+import { Post } from "../../../models/Post";
 import { connectToDatabase } from "../../../libs/mongodb";
 
 connectToDatabase();
 
-export async function GET(req: Request) {
+export async function GET(req: Request): Promise<NextResponse> {
   try {
     const posts = await Post.find();
     return NextResponse.json(posts.reverse());

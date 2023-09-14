@@ -5,7 +5,7 @@ import { connectToDatabase } from "../../../../libs/mongodb";
 
 connectToDatabase();
 
-export async function GET(req: Request, { params }: { params: { slug: string } }){
+export async function GET(req: Request, { params }: { params: { slug: string } }): Promise<NextResponse> {
     const slug = params.slug;
     try {
         const posts = await Post.find({slug: slug})
