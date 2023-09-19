@@ -1,14 +1,11 @@
-import { connect, connection } from 'mongoose'
+import mongoose from 'mongoose';
 
-const  MONGO_URI: string = process.env.MONGO_URI || 'mongodb://localhost:27017/nextjs-blog'
-const options: any = {
-  useUnifiedTopology: true,
-  useNewUrlParser: true
-}
+const  dbUrl = process.env.MONGO_URI as string;
+let connection: typeof mongoose;
 
 export const connectToDatabase = async () => {
-  if (!connection.readyState) {
-    console.log('Connecting to ', MONGO_URI)
-    connect(MONGO_URI, options)
+  if (!connection) {
+    connection = await mongoose.connect(dbUrl);
+    return connection;
   }
 }
