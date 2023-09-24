@@ -1,15 +1,34 @@
-import React from 'react'
+import React from "react";
 
-const InputField = ({props}) => {
-    const {myLabel, type, name, value, onChange} = props; 
-  return (
-    <div>
-        <label>
-            {myLabel}
-            <input type={type} name={name} value={value} onChange={onChange} />
-        </label>
-    </div>    
-  )
+interface Props {
+  label: string;
+  name: string;
+  type: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default InputField
+const InputField: React.FC<Props> = ({
+  label,
+  name,
+  type,
+  value,
+  onChange,
+}) => {
+  return (
+    <div>
+      <label>
+        {label}:
+        <input
+          className="box-border p-3 border-1 border-gray-700 w-full"
+          type={type}
+          name={name}
+          value={value}
+          onChange={onChange}
+        />
+      </label>
+    </div>
+  );
+};
+
+export default InputField;

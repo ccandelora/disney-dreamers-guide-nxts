@@ -33,21 +33,21 @@ const SignUp = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <form onSubmit={handleSubmit} className="max-w-md w-full space-y-8">
         <InputField
-          myLabel="Name"
+          label="Name"
           type="text"
           name="name"
           value={name}
           onChange={handleChange}
         />
         <InputField
-          myLabel="Email"
+          label="Email"
           type="email"
           name="email"
           value={email}
           onChange={handleChange}
         />
         <InputField
-          myLabel="Password"
+          label="Password"
           type="password"
           name="password"
           value={password}
@@ -59,8 +59,10 @@ const SignUp = () => {
         >
           Sign Up
         </button>
+        <div className="">Already have an accout? Login in 
+        <Link className="text-purple-700" href="/auth/sign-in"> here</Link>.
+        </div>
       </form>
-      <p className="mt-4">Already have an accout? Login in here.</p>
     </div>
   );
 };
