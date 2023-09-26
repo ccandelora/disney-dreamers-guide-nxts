@@ -3,6 +3,7 @@ import InputField from "@/components/InputField";
 import TextAreaInput from "@/components/TextAreaInput";
 import { set } from "mongoose";
 import React, { ChangeEventHandler, FormEventHandler, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const AddPost = () => {
   const [postInfo, setPostInfo] = useState({
@@ -28,6 +29,8 @@ const AddPost = () => {
     photographerUrl,
   } = postInfo;
 
+  const router = useRouter();
+  
   const handleChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { name, value } = target;
     setPostInfo({
@@ -53,17 +56,7 @@ const AddPost = () => {
       body: JSON.stringify(postInfo),
     }).then((res) => res.json());
     console.log(res);
-    setPostInfo({
-      title: "",
-      description: "",
-      content: "",
-      author: "",
-      fileName: "",
-      category: "",
-      alt: "",
-      photographer: "",
-      photographerUrl: "",
-    });
+    router.replace("/dashboard");
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">

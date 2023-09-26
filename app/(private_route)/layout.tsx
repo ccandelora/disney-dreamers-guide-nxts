@@ -7,7 +7,6 @@ interface Props {
 
 export default async function PrivateLayout({ children }: Props) {
     const session = await getServerSession();
-    console.log(session);
     if (!session) {
         return (
             <div>
