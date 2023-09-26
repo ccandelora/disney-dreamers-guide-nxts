@@ -7,3 +7,6 @@
       padding-bottom: 20px;
     }
 }
+ h2 {
+  @apply text-2xl font-bold text-gray-900;
+ }
