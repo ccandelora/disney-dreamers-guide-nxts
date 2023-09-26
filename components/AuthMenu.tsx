@@ -11,8 +11,7 @@ export default function AuthMenu() {
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', current: true },
     { name: 'Add Post', href: '/add-post', current: false },
-    { name: 'List Posts', href: '/list-posts', current: false },
-    { name: 'Add User', href: '/auth/sign-up', current: false },
+    { name: 'Add User', href: '/sign-up', current: false },
   ]
   
   function classNames(...classes: any) {
@@ -21,7 +20,7 @@ export default function AuthMenu() {
 
   if (isAuth) {
     return (
-      <nav className="flex flex-1 flex-col" aria-label="Sidebar">
+      <nav className="flex flex-col px-4" aria-label="Sidebar">
         <ul role="list" className="-mx-2 space-y-1">
             <li><button onClick={()=> signOut()}>Logout</button></li>
           {navigation.map((item) => (

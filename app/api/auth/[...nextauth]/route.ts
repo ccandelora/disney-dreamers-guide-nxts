@@ -4,7 +4,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDatabase } from "../../../../libs/mongodb";
 import UserModel from "../../../../models/User";
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
