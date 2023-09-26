@@ -4,6 +4,8 @@ import Script from "next/script";
 import { Inter } from "next/font/google";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import AuthProvider from "@/components/AuthProvider";
+import { SessionProvider } from "next-auth/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
+    <AuthProvider>
     <html lang="en">
       <Script
         async
@@ -53,5 +56,6 @@ export default function RootLayout({
         ></Script>
       </body>
     </html>
+    </AuthProvider>
   );
 };
