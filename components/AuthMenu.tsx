@@ -1,6 +1,5 @@
 "use client";
 import { useSession , signOut} from "next-auth/react";
-import Link from "next/link";
 import React from "react";
 
 export default function AuthMenu() {
