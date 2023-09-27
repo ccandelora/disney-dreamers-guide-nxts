@@ -20,6 +20,8 @@ const EditPost = (props: { post: PostType }) => {
             alt: post.alt,
             photographer: post.photographer,
             photographerUrl: post.photographerUrl,
+            createdAt: post.createdAt,
+            updatedAt: Date.now(),
     });
 
     const {

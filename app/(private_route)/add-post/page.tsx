@@ -16,6 +16,8 @@ const AddPost = () => {
     alt: "",
     photographer: "",
     photographerUrl: "",
+    createdAt: new Date(),
+    updatedAt: new Date(),
   });
   const {
     title,
