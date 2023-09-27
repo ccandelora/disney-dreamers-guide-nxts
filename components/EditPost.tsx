@@ -37,6 +37,8 @@ const EditPost = (props: { post: PostType }) => {
         alt,
         photographer,
         photographerUrl,
+        createdAt,
+        updatedAt,
     } = postInfo;
 
     const router = useRouter();

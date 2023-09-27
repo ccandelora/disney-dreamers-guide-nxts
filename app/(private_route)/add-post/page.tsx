@@ -29,6 +29,8 @@ const AddPost = () => {
     alt,
     photographer,
     photographerUrl,
+    createdAt,
+    updatedAt,
   } = postInfo;
 
   const router = useRouter();
